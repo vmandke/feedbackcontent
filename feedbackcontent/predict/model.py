@@ -4,6 +4,8 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 from feedbackcontent.predict.preprocess import Preprocess
+from feedbackcontent.util.config import get_config
+
 
 class Loader:
     def __init__(self, model_path):
@@ -14,6 +16,7 @@ class Loader:
                   np.load(os.path.join(
                               self.model_path,
                               '{}.npz'.format(model_name))))
+
 
 class Model:
     def __init__(self, model):
@@ -26,11 +29,12 @@ class Model:
                                 lang="en",
                                 use_stemmer=True,
                                 stop_words=self.stop_words)
+
     def tokenize(self, text):
         # Add a 1 for the intercept
         processed_text = " ".join(self.preprocessor.process(text))
-        return np.hstack((self.vectorizer.transform([processed_text]).toarray(),
-                          [[1]]))
+        return np.hstack(
+            (self.vectorizer.transform([processed_text]).toarray(), [[1]]))
 
     def load_vocab(self, vocab_arr):
         return dict(zip(vocab_arr, range(vocab_arr.shape[0])))

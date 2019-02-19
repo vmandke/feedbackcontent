@@ -9,11 +9,12 @@ from faker import Faker
 
 from feedbackcontent.predict.model import Loader, Model
 
+
 __model = None
 __generator = None
 
-@pytest.fixture(scope='module')
 
+@pytest.fixture(scope='module')
 def fdt_setup(request):
     global __model, __generator
     # create a temp model
@@ -41,10 +42,12 @@ def fdt_setup(request):
 def test_load_model(fdt_setup):
     pass
 
+
 def test_tokenize(fdt_setup):
     text = __generator.paragraph()
     # ensure that no error is raised
     __model.tokenize(text)
+
 
 def test_predict(fdt_setup):
     text = __generator.paragraph()

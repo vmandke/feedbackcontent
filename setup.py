@@ -21,6 +21,8 @@ setup(name='feedbackcontent',
                         'funcy==1.11',
                         'matplotlib-venn==0.11.5',
                         'PyStemmer==1.3.0',
+                        'Flask==0.12',
                         'Faker==1.0.2',
+                        'gunicorn==19.6.0',
                         'jupyter==1.0.0'],
       entry_points={})

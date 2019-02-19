@@ -5,8 +5,8 @@ from feedbackcontent.predict.preprocess import Preprocess
 
 __preprocessor = None
 
-@pytest.fixture(scope='module')
 
+@pytest.fixture(scope='module')
 def fdt_setup(request):
     global __preprocessor
     stopwords = ['accordingly', 'this']

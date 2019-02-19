@@ -7,6 +7,7 @@ from polyglot.tokenize import WordTokenizer
 from polyglot.base import Sequence
 import Stemmer
 
+
 class Preprocess:
     def __init__(self, lang, use_stemmer, stop_words):
         self.lang = lang
@@ -16,7 +17,7 @@ class Preprocess:
         # check if supported
         self.stemmer = Stemmer.Stemmer(self.lang)
         self.stop_words = stop_words
-    
+
     def stem(self, tokens):
         return (self.stemmer.stemWords(tokens)
                 if self.use_stemmer
@@ -24,14 +25,14 @@ class Preprocess:
 
     def remove_accents(self, text):
         return (unicodedata.normalize('NFD', text)
-                            .encode('ascii', 'ignore')
-                            .decode("utf-8"))
+                .encode('ascii', 'ignore')
+                .decode("utf-8"))
 
     def lower(self, text):
         return text.lower()
 
     def clear_html(self, text):
-        # Html cleaner will throw exception when an incorrect tag 
+        # Html cleaner will throw exception when an incorrect tag
         # formation is detected a 'prompt' like symbol e.g.: '<- '
         try:
             text = clean_html(html.fromstring(text)).text_content()
