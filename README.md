@@ -7,4 +7,4 @@ Minimal API for Toxic comments
     $ gunicorn -w 2 --timeout 90 --bind '0.0.0.0:5000' "feedbackcontent:setup_app()"
 
 ### Run tests
-    $ nosetests
+    $ make test
