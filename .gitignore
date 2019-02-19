@@ -1,0 +1,9 @@
+.env/
+data/
+feedbackcontent.egg-info/
+.ipynb_checkpoints/
+.cache/
+
+
+
+
