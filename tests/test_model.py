@@ -7,6 +7,7 @@ from random import random, randint, choice
 import numpy as np
 from faker import Faker
 
+from sklearn.feature_extraction.text import TfidfVectorizer
 from feedbackcontent.predict.model import Loader, Model
 
 
@@ -20,12 +21,15 @@ def fdt_setup(request):
     # create a temp model
     __generator = Faker()
     vocab = list(set(__generator.words(500)))
+    vectorizer = TfidfVectorizer(vocabulary=vocab)
+    vectorizer.idf_ = [randint(1, 15) for i in range(len(vocab))]
     model = {
         "vocab": vocab,
         "stop_words": list(set(__generator.words(10))),
         "intercept": [1],
-        "idf_": [randint(1, 15) for i in range(len(vocab))],
+        "idf_": vectorizer.idf_,
         "lr": [random() for i in range(len(vocab))],
+        "vectorizer": [vectorizer]
     }
     np.savez('/tmp/model', **model)
 
