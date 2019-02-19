@@ -23,8 +23,12 @@ class Model:
         self.stop_words = set(model["stop_words"])
         self.vocab = self.load_vocab(model["vocab"])
         self.lr = np.hstack((model["lr"], model["intercept"]))
-        self.vectorizer = TfidfVectorizer(vocabulary=self.vocab)
-        self.vectorizer.idf_ = model["idf_"]
+        # TODO (vin): Ideally we should be able to rebuild
+        # vectorizer, however folllowing does not work, hence pickle
+        # the entire vectorizer object
+        # self.vectorizer = TfidfVectorizer(vocabulary=self.vocab)
+        # self.vectorizer.idf_ = model["idf_"]
+        self.vectorizer = model["vectorizer"][0]
         self.preprocessor = Preprocess(
                                 lang="en",
                                 use_stemmer=True,
