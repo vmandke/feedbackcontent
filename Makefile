@@ -13,7 +13,7 @@ clean:
 deps: $(PRE_DEPS)
 	$(VIRTUAL_ENV)/bin/pip install -e .
 
-test: deps
+test: deps clean
 	$(VIRTUAL_ENV)/bin/pytest
 
 startnotebook: deps
